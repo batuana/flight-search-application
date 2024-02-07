@@ -12,12 +12,12 @@ export function getFormattedDate(date) {
 export function calculateArrivalTime(departureTime, duration) {
   const [hour, minute] = departureTime.split(":");
 
-  const totalMinutes = +minute + duration; // 41 +121 = 162
+  const totalMinutes = +minute + duration;
 
-  const durationHours = Math.floor(totalMinutes / 60); // 2
-  const durationMinutes = totalMinutes % 60; //42
+  const durationHours = Math.floor(totalMinutes / 60);
+  const durationMinutes = totalMinutes % 60;
 
-  const newHour = (+hour + durationHours) % 24; // 15
+  const newHour = (+hour + durationHours) % 24;
   const newMinute = durationMinutes;
 
   const newTime = `${newHour}:${newMinute}`;

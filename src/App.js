@@ -16,6 +16,7 @@ export default function App() {
     <>
       <InputContainer
         destinations={ALL_DESTINATIONS}
+        isLoading={isLoading}
         setIsLoading={setIsLoading}
         setInfoMessage={setInfoMessage}
         setResultingFlights={setResultingFlights}

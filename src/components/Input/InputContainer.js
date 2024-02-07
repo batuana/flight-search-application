@@ -21,6 +21,7 @@ let allFlights = [];
 
 export default function InputContainer({
   destinations,
+  isLoading,
   setIsLoading,
   setInfoMessage,
   setResultingFlights,
@@ -177,7 +178,11 @@ export default function InputContainer({
             enabled={inputs.flightType === "round-trip" ? true : false}
             isValid={inputs.arrivalDate.isValid}
           />
-          <TextButton text="SEARCH" handleOnClick={getFlights} />
+          <TextButton
+            text="SEARCH"
+            handleOnClick={getFlights}
+            isDisabled={isLoading}
+          />
         </div>
       </div>
       <ToastContainer limit={5} />
