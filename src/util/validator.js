@@ -1,7 +1,6 @@
 import { toast } from "react-toastify";
 
 export function validateAllInputs(toastId, inputs, setInputs) {
-  console.log("Here");
   let textInputsAreValid = true;
   let dateInputsAreValid = true;
 
@@ -48,7 +47,6 @@ export function validateAllInputs(toastId, inputs, setInputs) {
           isValid: false,
         },
       }));
-      console.log("Here");
 
       const toastId = toast.error("Date fields can not be the same.", {
         style: {

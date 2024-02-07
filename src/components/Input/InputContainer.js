@@ -77,9 +77,6 @@ export default function InputContainer({
     if (inputsAreValid && !allFlights.length) {
       setIsLoading(true);
       allFlights = await getAllFlights();
-
-      console.log(allFlights);
-
       allFlights = allFlights.map((flight) => ({
         ...flight,
         departure_time: formatTime(flight["departure_time"]),
