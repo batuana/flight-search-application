@@ -81,36 +81,6 @@ body {
   transition: all 0.2s;
 }
 
-.input-box-error {
-  border: 5px solid var(--color-error-300);
-}
-
-.error-message {
-  position: absolute;
-  top: 110%;
-  font-size: 1.3rem;
-  color: var(--color-error-700);
-}
-
-.error-animation {
-  animation: shake 0.2s ease-in-out 0s 2;
-}
-
-@keyframes shake {
-  0% {
-    margin-left: 0rem;
-  }
-  25% {
-    margin-left: 0.2rem;
-  }
-  75% {
-    margin-left: -0.2rem;
-  }
-  100% {
-    margin-left: 0rem;
-  }
-}
-
 .input-box:focus {
   outline: none;
 }
@@ -131,6 +101,17 @@ body {
 .input-label-top {
   top: 0.5rem;
   font-size: 1.3rem;
+}
+
+.input-box-error {
+  border: 5px solid var(--color-error-300);
+}
+
+.error-message {
+  position: absolute;
+  top: 110%;
+  font-size: 1.3rem;
+  color: var(--color-error-700);
 }
 
 .auto-complete {
@@ -237,6 +218,46 @@ body {
   justify-content: center;
 }
 
+.flights-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flights-info-message {
+  font-size: 2rem;
+  margin-left: 3rem;
+  margin-top: 1.5rem;
+  font-style: italic;
+}
+
+.select-container {
+  margin-top: 2rem;
+  margin-right: 3rem;
+}
+
+.select-container label {
+  font-size: 1.8rem;
+  margin-right: 0.7rem;
+}
+
+.select-container select {
+  background-color: var(--color-primary-200);
+  border: none;
+  border-radius: 10rem;
+  padding: 1rem 1.5rem;
+  font-family: inherit;
+  font-size: 1.5rem;
+  text-align-last: center;
+  color: white;
+  cursor: pointer;
+  outline: none;
+}
+
+.select-container select:hover {
+  opacity: 0.9;
+}
+
 .tickets-list {
   padding: 3rem;
   display: grid;
@@ -341,38 +362,4 @@ body {
   right: 0.7rem;
   font-size: 2.5rem;
   font-weight: bold;
-}
-
-.flights-error {
-  font-size: 2rem;
-  margin-left: 3rem;
-  margin-top: 1.5rem;
-  font-style: italic;
-}
-
-.select-container {
-  margin-top: 2rem;
-  margin-right: 3rem;
-}
-
-.select-container label {
-  font-size: 1.8rem;
-  margin-right: 0.7rem;
-}
-
-.select-container select {
-  background-color: var(--color-primary-200);
-  border: none;
-  border-radius: 10rem;
-  padding: 1rem 1.5rem;
-  font-family: inherit;
-  font-size: 1.5rem;
-  text-align-last: center;
-  color: white;
-  cursor: pointer;
-  outline: none;
-}
-
-.select-container select:hover {
-  opacity: 0.9;
 }

@@ -5,31 +5,19 @@ import { ThreeDots } from "react-loader-spinner";
 import InputContainer from "./components/Input/InputContainer";
 import FlightsList from "./components/FlightsOutput/FlightsList";
 
-const allDestinations = [
-  "Istanbul (IST)",
-  "New York (JFK)",
-  "Los Angeles (LAX)",
-  "Chicago (ORD)",
-  "Atlanta (ATL)",
-  "Dallas (DFW)",
-  "San Francisco (SFO)",
-  "Las Vegas (LAS)",
-  "Miami (MIA)",
-  "Boston (BOS)",
-  "Phoenix (PHX)",
-];
+import { ALL_DESTINATIONS } from "./data/destinations";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [infoMessage, setInfoMessage] = useState("");
   const [resultingFlights, setResultingFlights] = useState([]);
 
   return (
     <>
       <InputContainer
-        destinations={allDestinations}
+        destinations={ALL_DESTINATIONS}
         setIsLoading={setIsLoading}
-        setErrorMessage={setErrorMessage}
+        setInfoMessage={setInfoMessage}
         setResultingFlights={setResultingFlights}
       />
       {isLoading ? (
@@ -37,7 +25,7 @@ export default function App() {
           <ThreeDots visible={true} height="250" width="250" color="#05a1fc" />
         </div>
       ) : (
-        <FlightsList data={resultingFlights} errorMsg={errorMessage} />
+        <FlightsList flightsData={resultingFlights} infoMessage={infoMessage} />
       )}
     </>
   );

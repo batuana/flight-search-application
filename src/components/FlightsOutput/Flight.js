@@ -3,8 +3,6 @@ import { cilFlightTakeoff } from "@coreui/icons";
 
 import PaperAirplaneImage from "../../assets/paper-airplane.jpg";
 
-import { formatTime } from "../../util/date";
-import { calculateArrivalTime } from "../../util/date";
 import { reformatMinutes } from "../../util/date";
 
 export default function Flight({ flightData }) {
@@ -34,7 +32,7 @@ export default function Flight({ flightData }) {
         <div className="information-column">
           <h3>DEPARTURE</h3>
           <div className="information-subcontainer">
-            <span>{formatTime(flightData["departure_time"])}</span>
+            <span>{flightData["departure_time"]}</span>
             <span>{flightData["departure_date"]}</span>
           </div>
         </div>

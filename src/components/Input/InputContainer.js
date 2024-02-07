@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { useState, useRef } from "react";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import SearchInput from "./SearchInput";
@@ -8,18 +8,21 @@ import DateInput from "./DateInput";
 import RadioInput from "./RadioInput";
 import TextButton from "../UI/TextButton";
 
-import TransferImage from "../../assets/transfer.png";
 import { getAllFlights } from "../../util/http";
 import { getFormattedDate } from "../../util/date";
 import { calculateArrivalTime } from "../../util/date";
 import { formatTime } from "../../util/date";
+import { validateAllInputs } from "../../util/validator";
+import { validateDestination } from "../../util/validator";
+
+import TransferImage from "../../assets/transfer.png";
 
 let allFlights = [];
 
 export default function InputContainer({
   destinations,
   setIsLoading,
-  setErrorMessage,
+  setInfoMessage,
   setResultingFlights,
 }) {
   const [inputs, setInputs] = useState({
@@ -68,121 +71,9 @@ export default function InputContainer({
     }));
   }
 
-  function validateAllInputs() {
-    console.log("Here");
-    let textInputsAreValid = true;
-    let dateInputsAreValid = true;
-
-    if (!toastId.current) toast.dismiss(toastId.current);
-
-    if (!inputs.departureAirport.isValid || !inputs.arrivalAirport.isValid)
-      textInputsAreValid = false;
-
-    if (inputs.departureAirport.value === "") {
-      setInputs((curInputs) => ({
-        ...curInputs,
-        departureAirport: {
-          ...curInputs.departureAirport,
-          isValid: false,
-        },
-      }));
-      textInputsAreValid = false;
-    }
-
-    if (inputs.arrivalAirport.value === "") {
-      setInputs((curInputs) => ({
-        ...curInputs,
-        arrivalAirport: {
-          ...curInputs.arrivalAirport,
-          isValid: false,
-        },
-      }));
-      textInputsAreValid = false;
-    }
-
-    if (inputs.flightType !== "one-way") {
-      if (
-        inputs.departureDate.value.toDateString() ===
-        inputs.arrivalDate.value.toDateString()
-      ) {
-        setInputs((curInputs) => ({
-          ...curInputs,
-          departureDate: {
-            ...curInputs.departureDate,
-            isValid: false,
-          },
-          arrivalDate: {
-            ...curInputs.arrivalDate,
-            isValid: false,
-          },
-        }));
-        console.log("Here");
-
-        const toastId = toast.error("Date fields can not be the same.", {
-          style: {
-            fontSize: "1.5rem",
-          },
-        });
-
-        dateInputsAreValid = false;
-      }
-
-      if (inputs.departureDate.value > inputs.arrivalDate.value) {
-        setInputs((curInputs) => ({
-          ...curInputs,
-          departureDate: {
-            ...curInputs.departureDate,
-            isValid: false,
-          },
-          arrivalDate: {
-            ...curInputs.arrivalDate,
-            isValid: false,
-          },
-        }));
-
-        const toastId = toast.error(
-          "Departure date can't be earlier than arrival date.",
-          {
-            style: {
-              fontSize: "1.5rem",
-            },
-          }
-        );
-
-        dateInputsAreValid = false;
-      }
-    }
-
-    if (dateInputsAreValid) {
-      setInputs((curInputs) => ({
-        ...curInputs,
-        departureDate: {
-          ...curInputs.departureDate,
-          isValid: true,
-        },
-        arrivalDate: {
-          ...curInputs.arrivalDate,
-          isValid: true,
-        },
-      }));
-    }
-
-    return textInputsAreValid && dateInputsAreValid;
-  }
-
-  function validateDestination(inputIdentifier, value) {
-    setInputs((curInputs) => ({
-      ...curInputs,
-      [inputIdentifier]: {
-        ...curInputs[inputIdentifier],
-        isValid: destinations.includes(value) ? true : false,
-      },
-    }));
-  }
-
   async function getFlights() {
-    setErrorMessage("");
-    const inputsAreValid = validateAllInputs();
+    setInfoMessage("");
+    const inputsAreValid = validateAllInputs(toastId, inputs, setInputs);
     if (inputsAreValid && !allFlights.length) {
       setIsLoading(true);
       allFlights = await getAllFlights();
@@ -199,7 +90,6 @@ export default function InputContainer({
       }));
     }
     if (inputsAreValid && allFlights.length) {
-      console.log("calculating resulting data");
       let resultingData = allFlights.filter(
         (flight) =>
           flight["departure_airport"] === inputs.departureAirport.value &&
@@ -214,7 +104,7 @@ export default function InputContainer({
             flight["departure_airport"] === inputs.departureAirport.value &&
             flight["arrival_airport"] === inputs.arrivalAirport.value
         );
-        setErrorMessage("No flights found, showing similar results...");
+        setInfoMessage("No flights found, showing similar results...");
       }
 
       setResultingFlights(resultingData);
@@ -248,7 +138,12 @@ export default function InputContainer({
             value={inputs.departureAirport.value}
             setValue={inputChangedHandler.bind(this, "departureAirport")}
             isValid={inputs.departureAirport.isValid}
-            validate={validateDestination.bind(this, "departureAirport")}
+            validate={validateDestination.bind(
+              this,
+              "departureAirport",
+              destinations,
+              setInputs
+            )}
           />
           <ImageButton
             style={{ marginLeft: "5px", marginRight: "5px" }}
@@ -263,7 +158,12 @@ export default function InputContainer({
             value={inputs.arrivalAirport.value}
             setValue={inputChangedHandler.bind(this, "arrivalAirport")}
             isValid={inputs.arrivalAirport.isValid}
-            validate={validateDestination.bind(this, "arrivalAirport")}
+            validate={validateDestination.bind(
+              this,
+              "arrivalAirport",
+              destinations,
+              setInputs
+            )}
           />
           <DateInput
             style={{ marginRight: "25px" }}
