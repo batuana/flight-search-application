@@ -1,0 +1,378 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap");
+
+:root {
+  --color-primary-100: #2eb0fc;
+  --color-primary-200: #05a1fc;
+  --color-primary-400: #084a80;
+  --color-primary-500: #053c5c;
+  --color-primary-700: #03273b;
+  --color-gray-100: #dce0e4;
+  --color-gray-300: #c1c4c7;
+  --color-gray-500: #898f94;
+  --color-gray-700: #4a4b4d;
+  --color-error-300: #f37171;
+  --color-error-700: #c71818;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%; /* 1rem = 10px  */
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.form {
+  padding: 5rem 15rem;
+  background-color: var(--color-primary-200);
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.radio-button-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: 1.7rem;
+}
+
+.radio-input {
+  border: 0px;
+  height: 1.7rem;
+  width: 1.7rem;
+}
+
+.radio-input-label {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.input-container {
+  position: relative;
+}
+
+.input-box {
+  width: 22rem;
+  height: 7rem;
+  padding: 1rem 1.5rem;
+  border: 5px solid white;
+  border-radius: 1.2rem;
+  font-family: inherit;
+  font-size: 1.7rem;
+  transition: all 0.2s;
+}
+
+.input-box-error {
+  border: 5px solid var(--color-error-300);
+}
+
+.error-message {
+  position: absolute;
+  top: 110%;
+  font-size: 1.3rem;
+  color: var(--color-error-700);
+}
+
+.error-animation {
+  animation: shake 0.2s ease-in-out 0s 2;
+}
+
+@keyframes shake {
+  0% {
+    margin-left: 0rem;
+  }
+  25% {
+    margin-left: 0.2rem;
+  }
+  75% {
+    margin-left: -0.2rem;
+  }
+  100% {
+    margin-left: 0rem;
+  }
+}
+
+.input-box:focus {
+  outline: none;
+}
+
+.input-label {
+  position: absolute;
+  margin-left: 2rem;
+  color: var(--color-gray-500);
+  transition: all 0.3s ease;
+}
+
+.input-label-middle {
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.8rem;
+}
+
+.input-label-top {
+  top: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.auto-complete {
+  position: absolute;
+  width: 90%;
+  top: 100%;
+  background-color: var(--color-gray-100);
+  border-radius: 1.2rem;
+  font-size: 1.5rem;
+  overflow: hidden;
+}
+
+.auto-complete ul {
+  list-style: none;
+}
+
+.auto-complete ul li {
+  padding: 0.7rem;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.auto-complete ul li:hover {
+  background-color: var(--color-gray-300);
+}
+
+.auto-complete ul li:active {
+  background-color: var(--color-gray-500);
+}
+
+.date-input {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.date-input-disabled {
+  opacity: 0.7;
+  cursor: auto;
+}
+
+.image-button {
+  padding: 0.5rem;
+  border: 1px solid black;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.image-button:hover {
+  background-color: var(--color-gray-100);
+}
+
+.image-button:active {
+  background-color: var(--color-gray-500);
+}
+
+.button-image {
+  width: 2.5rem;
+}
+
+.text-button {
+  width: 15rem;
+  height: 7rem;
+  background-color: var(--color-primary-400);
+  border: none;
+  border-radius: 1.2rem;
+  font-family: inherit;
+  font-size: 1.7rem;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.text-button:hover {
+  background-color: var(--color-primary-500);
+}
+
+.text-button:active {
+  background-color: var(--color-primary-700);
+}
+
+.calendar-container {
+  position: absolute;
+  top: 7.5rem;
+}
+
+.calendar-container::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50px;
+  border: 11px solid transparent;
+  border-bottom-color: var(--color-gray-100);
+}
+
+.loader {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tickets-list {
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3rem;
+}
+
+.ticket {
+  height: 30rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  overflow: hidden;
+}
+
+.ticket-header {
+  position: relative;
+  height: 3rem;
+  background-color: var(--color-primary-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ticket-header-icon {
+  position: absolute;
+  width: 2.2rem;
+  color: white;
+  top: 0.2rem;
+  left: 1rem;
+}
+
+.ticket-header-text {
+  color: white;
+  font-size: 2.5rem;
+}
+
+.ticket-body {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4rem;
+}
+
+.airline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 2rem;
+  color: var(--color-primary-200);
+}
+
+.destinations {
+  display: flex;
+}
+
+.destination {
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+.destination:first-child {
+  align-self: flex-end;
+}
+
+.destination-image {
+  width: 33rem;
+  aspect-ratio: 2;
+}
+
+.ticket-information {
+  position: relative;
+  display: flex;
+  margin-left: 2rem;
+  gap: 1.5rem;
+}
+
+.information-column {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--color-gray-700);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.information-column h3 {
+  font-size: 1.8rem;
+  color: var(--color-primary-100);
+}
+
+.information-subcontainer {
+  display: flex;
+  gap: 1rem;
+}
+
+.price-container {
+  position: absolute;
+  bottom: -1.5rem;
+  right: 0.7rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.flights-error {
+  font-size: 2rem;
+  margin-left: 3rem;
+  margin-top: 1.5rem;
+  font-style: italic;
+}
+
+.select-container {
+  margin-top: 2rem;
+  margin-right: 3rem;
+}
+
+.select-container label {
+  font-size: 1.8rem;
+  margin-right: 0.7rem;
+}
+
+.select-container select {
+  background-color: var(--color-primary-200);
+  border: none;
+  border-radius: 10rem;
+  padding: 1rem 1.5rem;
+  font-family: inherit;
+  font-size: 1.5rem;
+  text-align-last: center;
+  color: white;
+  cursor: pointer;
+  outline: none;
+}
+
+.select-container select:hover {
+  opacity: 0.9;
+}

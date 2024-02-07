@@ -1,0 +1,10 @@
+.rdp {
+  --rdp-accent-color: black; /* Accent color for the background of selected days. */
+  --rdp-background-color: #898f94; /* Background color for the hovered/focused elements. */
+
+  margin: 0;
+}
+
+.rdp-month:first-child {
+  margin-right: 25px;
+}

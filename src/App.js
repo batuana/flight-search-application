@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
 
-function App() {
+import { ThreeDots } from "react-loader-spinner";
+
+import InputContainer from "./components/Input/InputContainer";
+import FlightsList from "./components/FlightsOutput/FlightsList";
+
+const allDestinations = [
+  "Istanbul (IST)",
+  "New York (JFK)",
+  "Los Angeles (LAX)",
+  "Chicago (ORD)",
+  "Atlanta (ATL)",
+  "Dallas (DFW)",
+  "San Francisco (SFO)",
+  "Las Vegas (LAS)",
+  "Miami (MIA)",
+  "Boston (BOS)",
+  "Phoenix (PHX)",
+];
+
+export default function App() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [resultingFlights, setResultingFlights] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <InputContainer
+        destinations={allDestinations}
+        setIsLoading={setIsLoading}
+        setErrorMessage={setErrorMessage}
+        setResultingFlights={setResultingFlights}
+      />
+      {isLoading ? (
+        <div className="loader">
+          <ThreeDots visible={true} height="250" width="250" color="#05a1fc" />
+        </div>
+      ) : (
+        <FlightsList data={resultingFlights} errorMsg={errorMessage} />
+      )}
+    </>
   );
 }
-
-export default App;
